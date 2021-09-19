@@ -26,6 +26,8 @@ composer require leafs/anchor
 
 After [installing](#installation) Katana, create an _index.php_ file.
 
+### Base XSS protection
+
 ```php
 <?php
 require __DIR__ . "vendor/autoload.php";
@@ -34,6 +36,17 @@ $data = $_POST["data"];
 $data = Leaf\Anchor::sanitize($data);
 
 echo $data;
+```
+
+This also works on arrays
+
+```php
+<?php
+require __DIR__ . "vendor/autoload.php";
+
+$data = Leaf\Anchor::sanitize($_POST);
+
+echo $data["input"];
 ```
 
 You may quickly test this using the built-in PHP server:
