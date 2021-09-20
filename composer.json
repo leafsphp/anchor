@@ -23,8 +23,5 @@
             "Leaf\\": "src"
         }
     },
-    "minimum-stability": "stable",
-    "require": {
-        "leafs/http": "^1.0"
-    }
+    "minimum-stability": "stable"
 }
