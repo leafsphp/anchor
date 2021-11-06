@@ -24,7 +24,7 @@ composer require leafs/anchor
 
 ## Basic Usage
 
-After [installing](#installation) Katana, create an _index.php_ file.
+After [installing](#installation) anchor, create an _index.php_ file.
 
 ### Base XSS protection
 
