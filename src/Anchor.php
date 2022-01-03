@@ -14,10 +14,10 @@ namespace Leaf;
 class Anchor
 {
 	protected static $config = [
-		"SECRET_KEY" => "_token",
-		"SECRET" => "@nkor_leaf$0Secret!",
-		"EXCEPT" => [],
-		"METHODS" => ["POST", "PUT", "PATCH", "DELETE"],
+		'SECRET_KEY' => '_token',
+		'SECRET' => '@nkor_leaf$0Secret!',
+		'EXCEPT' => [],
+		'METHODS' => ['POST', 'PUT', 'PATCH', 'DELETE'],
 	];
 
 	protected static $errors = [];
@@ -59,7 +59,7 @@ class Anchor
 	 */
 	public static function generateToken()
 	{
-		$token = base64_encode(static::$config["SECRET"] . random_bytes(16));
+		$token = base64_encode(static::$config['SECRET'] . random_bytes(16));
 
 		return $token;
 	}
