@@ -59,7 +59,7 @@ class Anchor
 	 */
 	public static function generateToken()
 	{
-		$token = base64_encode(static::$config['SECRET'] . random_bytes(16));
+		$token = bin2hex(static::$config['SECRET'] . random_bytes(16));
 
 		return $token;
 	}
