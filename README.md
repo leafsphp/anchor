@@ -1,18 +1,17 @@
 <!-- markdownlint-disable no-inline-html -->
 <p align="center">
   <br><br>
-  <img src="https://leafphp.netlify.app/assets/img/leaf3-logo.png" height="100"/>
-  <h1 align="center">Leaf Security Module</h1>
+  <img src="https://leafphp.dev/logo-circle.png" height="100"/>
   <br><br>
 </p>
 
-# Leaf PHP
+# Leaf Anchor
 
 [![Latest Stable Version](https://poser.pugx.org/leafs/anchor/v/stable)](https://packagist.org/packages/leafs/anchor)
 [![Total Downloads](https://poser.pugx.org/leafs/anchor/downloads)](https://packagist.org/packages/leafs/anchor)
 [![License](https://poser.pugx.org/leafs/anchor/license)](https://packagist.org/packages/leafs/anchor)
 
-This package contains leaf's utils for deep sanitizing of data and basic security provided for your app data.
+This package contains leaf's utils for deep sanitizing of data and basic security provided for your app data. It also serves as the base for security provided in other modules like CSRF.
 
 ## Installation
 
@@ -54,5 +53,3 @@ You may quickly test this using the built-in PHP server:
 ```bash
 php -S localhost:8000
 ```
-
-Built with ❤ by [**Mychi Darko**](https://mychi.netlify.app)

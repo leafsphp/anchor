@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Leaf;
 
 /**
@@ -14,10 +16,10 @@ namespace Leaf;
 class Anchor
 {
 	protected static $config = [
-		"SECRET_KEY" => "_token",
-		"SECRET" => "@nkor_leaf$0Secret!",
-		"EXCEPT" => [],
-		"METHODS" => ["POST", "PUT", "PATCH", "DELETE"],
+		'SECRET_KEY' => '_token',
+		'SECRET' => '@nkor_leaf$0Secret!',
+		'EXCEPT' => [],
+		'METHODS' => ['POST', 'PUT', 'PATCH', 'DELETE'],
 	];
 
 	protected static $errors = [];
@@ -45,7 +47,7 @@ class Anchor
 	{
 		if (is_array($data)) {
 			foreach ($data as $key => $value) {
-				$data[self::sanitize($key)] = self::sanitize($value);
+				$data[is_string($key) ? self::sanitize($key) : $key] = self::sanitize($value);
 			}
 		} else {
 			$data = htmlspecialchars($data, ENT_QUOTES, 'UTF-8');
@@ -56,15 +58,15 @@ class Anchor
 
 	/**
 	 * Generate a token for identifying your application
+	 * 
+	 * @param int $strength Number of random characters to attach to token
 	 */
-	public static function generateToken()
+	public static function generateToken(int $strength = 16): string
 	{
-		$token = base64_encode(static::$config["SECRET"] . random_bytes(16));
-
-		return $token;
+		return bin2hex(static::$config['SECRET'] . '.' . random_bytes($strength));;
 	}
 
-	public static function errors()
+	public static function errors(): array
 	{
 		return static::$errors;
 	}
