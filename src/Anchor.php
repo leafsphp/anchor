@@ -49,7 +49,9 @@ class Anchor
 			foreach ($data as $key => $value) {
 				$data[is_string($key) ? self::sanitize($key) : $key] = self::sanitize($value);
 			}
-		} else {
+		}
+
+		if (is_string($data)) {
 			$data = htmlspecialchars($data, ENT_QUOTES, 'UTF-8');
 		}
 
