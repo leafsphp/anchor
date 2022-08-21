@@ -66,6 +66,28 @@ class Anchor
 		return bin2hex(static::$config['SECRET'] . '.' . random_bytes($strength));;
 	}
 
+	/**
+	 * Return an item or items from an array of items or a default value
+	 * 
+	 * @param array $items An array of items
+	 * @param string|array $items The item(s) to return
+	 * @param mixed $default The default value to return if no item is found
+	 */
+	public static function findFromArrayWithDefault($data, $items, $default = null)
+	{
+		$output = [];
+
+		if (is_array($items)) {
+			foreach ($items as $dataItem) {
+				$output[$dataItem] = $data[$dataItem] ?? null;
+			}
+		} else {
+			$output = $data[$items] ?? null;
+		}
+
+		return $output ?? $default;
+	}
+
 	public static function errors(): array
 	{
 		return static::$errors;
