@@ -84,6 +84,32 @@ class Anchor
     }
 
     /**
+     * Convert string to boolean. Created due to inconsistencies in PHP's boolval and (bool)
+     * 
+     * @param string $value The value to convert
+     * @return bool
+     */
+    public static function toBool($value) {
+        if (is_bool($value)) {
+            return $value;
+        }
+
+        if (is_string($value)) {
+            $value = strtolower($value);
+
+            if ($value === 'true' || $value === '1') {
+                return true;
+            }
+
+            if ($value === 'false' || $value === '0') {
+                return false;
+            }
+        }
+
+        return (bool) $value;
+    }
+
+    /**
      * Generate a token for identifying your application
      *
      * @param int $strength Number of random characters to attach to token
