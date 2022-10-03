@@ -119,4 +119,9 @@ class Anchor
     {
         return bin2hex(static::$config['SECRET'] . '.' . random_bytes($strength));
     }
+
+    public static function errors(): array
+    {
+        return static::$errors;
+    }
 }
