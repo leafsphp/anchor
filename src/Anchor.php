@@ -1,6 +1,6 @@
 <?php
 
-declare (strict_types = 1);
+declare(strict_types=1);
 
 namespace Leaf;
 
@@ -58,19 +58,19 @@ class Anchor
         return $data;
     }
 
-	  /**
-	   * Get an item or items from an array of data.
-	   * 
-	   * @param array $dataSource An array of data to search through
-	   * @param string|array $item The items to return
-	   */
-      public static function deepGet($dataSource, $item = null)
-      {
-	  	  if (!$item) {
-  	  	  	return $dataSource;
-  	  	}
+    /**
+     * Get an item or items from an array of data.
+     * 
+     * @param array $dataSource An array of data to search through
+     * @param string|array $item The items to return
+     */
+    public static function deepGet($dataSource, $item = null)
+    {
+        if (!$item) {
+            return $dataSource;
+        }
 
-  	  	$output = [];
+        $output = [];
 
         if (is_array($item)) {
             foreach ($item as $dataItem) {
@@ -80,7 +80,7 @@ class Anchor
             $output = $dataSource[$item] ?? null;
         }
 
-		    return $output;
+        return $output;
     }
 
     /**
@@ -89,7 +89,8 @@ class Anchor
      * @param string $value The value to convert
      * @return bool
      */
-    public static function toBool($value) {
+    public static function toBool($value)
+    {
         if (is_bool($value)) {
             return $value;
         }
@@ -118,31 +119,4 @@ class Anchor
     {
         return bin2hex(static::$config['SECRET'] . '.' . random_bytes($strength));
     }
-
-	  /**
-	   * Return an item or items from an array of items or a default value
-	   * 
-	   * @param array $items An array of items
-	   * @param string|array $items The item(s) to return
-	   * @param mixed $default The default value to return if no item is found
-	   */
-	  public static function findFromArrayWithDefault($data, $items, $default = null)
-	  {
-	  	  $output = [];
-  
-	  	  if (is_array($items)) {
-	  	  	  foreach ($items as $dataItem) {
-	  	  	  	  $output[$dataItem] = $data[$dataItem] ?? null;
-	  	  	  }
-	  	  } else {
-	  	  	  $output = $data[$items] ?? null;
-	  	  }
-
-	  	  return $output ?? $default;
-	  }
-
-	  public static function errors(): array
-	  {
-	  	  return static::$errors;
-	  }
 }
