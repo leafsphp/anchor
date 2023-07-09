@@ -60,7 +60,7 @@ class Anchor
 
     /**
      * Get an item or items from an array of data.
-     * 
+     *
      * @param array $dataSource An array of data to search through
      * @param string|array $item The items to return
      */
@@ -84,8 +84,95 @@ class Anchor
     }
 
     /**
+     * Deep get an item or items from an array of data using dot notation.
+     *
+     * @param array $dataSource An array of data to search through
+     * @param string|array $item The items to return
+     */
+    public static function deepGetDot($dataSource, $item = null)
+    {
+        if (!$item) {
+            return $dataSource;
+        }
+
+        $output = [];
+
+        if (is_array($item)) {
+            foreach ($item as $dataItem) {
+                $output[$dataItem] = static::deepGetDot($dataSource, $dataItem);
+            }
+        } else {
+            $items = explode('.', $item);
+
+            if (count($items) > 1) {
+                $output = static::deepGetDot($dataSource[$items[0]] ?? null, $items[1]);
+            } else {
+                $output = $dataSource[$item] ?? null;
+            }
+        }
+
+        return $output;
+    }
+
+    /**
+     * Deep set an item or items in an array of data using dot notation.
+     *
+     * @param array $dataSource An array of data to search through
+     * @param string|array $item The items to set
+     * @param mixed $value The value to set
+     */
+    public static function deepSetDot($dataSource, $item, $value = null)
+    {
+        if (is_array($item)) {
+            foreach ($item as $dataItem => $dataValue) {
+                $dataSource = static::deepSetDot($dataSource, $dataItem, $dataValue);
+            }
+        } else {
+            $items = explode('.', $item);
+
+            if (count($items) > 2) {
+                trigger_error('Nested config can\'t be more than 1 level deep at ' . $item);
+            }
+
+            if (count($items) > 1) {
+                $dataSource[$items[0]] = static::deepSetDot($dataSource[$items[0]] ?? null, $items[1], $value);
+            } else {
+                $dataSource[$item] = $value;
+            }
+        }
+
+        return $dataSource;
+    }
+
+    /**
+     * Deep unset an item or items in an array of data using dot notation.
+     */
+    public static function deepUnsetDot($dataSource, $item)
+    {
+        if (is_array($item)) {
+            foreach ($item as $dataItem) {
+                $dataSource = static::deepUnsetDot($dataSource, $dataItem);
+            }
+        } else {
+            $items = explode('.', $item);
+
+            if (count($items) > 2) {
+                trigger_error('Nested config can\'t be more than 1 level deep at ' . $item);
+            }
+
+            if (count($items) > 1) {
+                $dataSource[$items[0]] = static::deepUnsetDot($dataSource[$items[0]] ?? null, $items[1]);
+            } else {
+                unset($dataSource[$item]);
+            }
+        }
+
+        return $dataSource;
+    }
+
+    /**
      * Convert string to boolean. Created due to inconsistencies in PHP's boolval and (bool)
-     * 
+     *
      * @param string $value The value to convert
      * @return bool
      */
