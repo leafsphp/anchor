@@ -36,11 +36,7 @@ class Anchor
      * @param array|null $config The config to set
      */
     public static function config($config = null)
-    {
-        if (file_exists('config/csrf.php')) {
-            static::$config = require 'config/csrf.php';
-        }
-        
+    {        
         if ($config === null) {
             return static::$config;
         }
