@@ -40,5 +40,8 @@
         "branch-alias": {
             "dev-v5.x": "5.0.x-dev"
         }
+    },
+    "require": {
+        "php": "^8.2"
     }
 }
