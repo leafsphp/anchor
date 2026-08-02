@@ -36,7 +36,7 @@ class Anchor
      * @param array|null $config The config to set
      */
     public static function config($config = null)
-    {        
+    {
         if ($config === null) {
             return static::$config;
         }
