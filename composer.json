@@ -43,11 +43,6 @@
             "pestphp/pest-plugin": true
         }
     },
-    "extra": {
-        "branch-alias": {
-            "dev-v5.x": "5.0.x-dev"
-        }
-    },
     "require": {
         "php": "^8.2",
         "leafs/alchemy": "v5.x-dev"
