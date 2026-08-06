@@ -16,7 +16,7 @@ namespace Leaf;
 class Anchor
 {
     protected static $config = [
-        'secret' => '@nkor_leaf$0Secret!!',
+        'secret' => null,
         'secretKey' => 'X-Leaf-CSRF-Token',
 
         'except' => [],
@@ -208,6 +208,10 @@ class Anchor
      */
     public static function generateToken(int $strength = 16): string
     {
+        if (!is_string(static::$config['secret'] ?? null) || static::$config['secret'] === '') {
+            throw new \RuntimeException('No secret is set. Pass a `secret` to config() before generating tokens.');
+        }
+
         $random = random_bytes(max(16, $strength));
 
         return bin2hex($random) . hash_hmac('sha256', $random, static::$config['secret']);
